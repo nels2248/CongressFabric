@@ -1,0 +1,102 @@
+table congress_edges
+	lineageTag: 3babec4a-c47b-48dc-bbd9-6171437f6ff7
+
+	measure Weight_Percentiles = ```
+			
+			"90th: " & PERCENTILE.INC(congress_edges[weight], 0.90) & 
+			" | 95th: " & PERCENTILE.INC(congress_edges[weight], 0.95) & 
+			" | 99th: " & PERCENTILE.INC(congress_edges[weight], 0.99) &
+			" | Max: " & MAX(congress_edges[weight])
+			```
+		lineageTag: fc42090f-cd28-4864-aa2c-d4334b0d79fd
+
+	column source
+		dataType: string
+		lineageTag: d081ebf9-0cb8-4810-aeb4-25e5405120f0
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column target
+		dataType: string
+		lineageTag: 1ad658e8-bb1e-41ce-84a7-51c12053293c
+		summarizeBy: none
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight
+		dataType: int64
+		formatString: 0
+		lineageTag: c5e08f0a-4acd-43ff-9787-05a139cb79c6
+		summarizeBy: sum
+		sourceColumn: weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_name
+		dataType: string
+		lineageTag: 31ed09fe-5436-4394-ad42-192dd9c3f828
+		summarizeBy: none
+		sourceColumn: source_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_party
+		dataType: string
+		lineageTag: 3502177a-6e4d-4142-af23-004304d91a8b
+		summarizeBy: none
+		sourceColumn: source_party
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_name
+		dataType: string
+		lineageTag: ea6c0a37-d6fb-48eb-989a-35292a0fba6e
+		summarizeBy: none
+		sourceColumn: target_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_party
+		dataType: string
+		lineageTag: c044b48a-9d30-486e-9632-4e0073313c54
+		summarizeBy: none
+		sourceColumn: target_party
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeightCapped = MIN(congress_edges[weight], 20)
+		lineageTag: 9ff13a04-b533-49bf-9ea9-44998ee72766
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EdgeRank =
+			
+			RANKX(
+			    FILTER(congress_edges, congress_edges[source] = EARLIER(congress_edges[source])),
+			    congress_edges[weight],,DESC
+			)
+		formatString: 0
+		lineageTag: 291435cb-7cd7-43d0-aa1e-6901ab8eb1ae
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_edges = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_gold_network_edges = Source{[Schema="congress_gold",Item="network_edges"]}[Data]
+				in
+				    congress_gold_network_edges
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

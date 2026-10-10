@@ -1,0 +1,52 @@
+table congress_text_versions
+	lineageTag: 20cac937-f0d8-40bd-ae39-49dd2b8cf5cf
+
+	measure '# Text Versions' = count('congress_silver bills'[Bill])
+		formatString: #,0
+		lineageTag: 212b4a06-0b9e-4722-b79e-b3b41403143c
+
+	column bill_id
+		dataType: string
+		lineageTag: d2e0d21c-0cd7-4260-b985-93d24775b5ae
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column version_name
+		dataType: string
+		lineageTag: 5cd6a8ee-a93f-4eea-82d0-9d2fd9bc17c0
+		summarizeBy: none
+		sourceColumn: version_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column version_date
+		dataType: string
+		lineageTag: 144daec2-5280-4b61-8dc8-b395d3f36225
+		summarizeBy: none
+		sourceColumn: version_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: b5e5d8b6-3f49-4a90-b696-b5f6fb5f2c31
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_text_versions = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_text_versions = Source{[Schema="congress_silver",Item="text_versions"]}[Data]
+				in
+				    congress_silver_text_versions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

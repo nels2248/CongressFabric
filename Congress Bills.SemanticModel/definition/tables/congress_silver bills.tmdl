@@ -1,0 +1,246 @@
+table 'congress_silver bills'
+	lineageTag: aeb5f88e-ff42-4dac-9587-a65fb2dc1f06
+
+	measure '# Bills' = count('congress_silver bills'[Bill])
+		formatString: #,0
+		lineageTag: 7eeb63d2-7c5d-4a30-8354-27bd5457ee30
+
+	measure 'Selection Message' =
+			
+			IF(
+			    HASONEVALUE('congress_silver bills'[Bill]),
+			    "DETAILS",
+			    "PLEASE SELECT ONE BILL ON LEFT SIDE TO SEE DETAILS BELOW"
+			)
+		lineageTag: 5051d253-9d9f-41b3-8348-477d051450e6
+
+	measure 'Show Details' =
+			
+			IF(
+			    COUNTROWS(ALLSELECTED('congress_silver bills'[Bill])) = 1,
+			    1,
+			    0
+			)
+		formatString: 0
+		lineageTag: b6aa1530-7392-4f8a-981f-97ad0f1c1d21
+
+	column source_file
+		dataType: string
+		lineageTag: 62b21f2b-67b3-4f19-9fe4-aceb5db05d92
+		summarizeBy: none
+		sourceColumn: source_file
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_type_dir
+		dataType: string
+		lineageTag: 5341bb88-bfd2-4bb7-aae5-811417c22ed4
+		summarizeBy: none
+		sourceColumn: bill_type_dir
+
+		annotation SummarizationSetBy = Automatic
+
+	column congress
+		dataType: string
+		lineageTag: 8505cc3f-1809-40da-8c50-1a45770f85de
+		summarizeBy: none
+		sourceColumn: congress
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_type
+		dataType: string
+		lineageTag: 5bf78691-70f7-46d4-bdee-ed9a4372ddcd
+		summarizeBy: none
+		sourceColumn: bill_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_number
+		dataType: string
+		lineageTag: 22e12d89-0992-4600-baf3-bf730c9b8358
+		summarizeBy: none
+		sourceColumn: bill_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bill
+		dataType: string
+		lineageTag: d4c92e59-0659-4ac2-a71e-df45c636404e
+		summarizeBy: none
+		sourceColumn: Bill
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 3dec9bf5-3508-49e6-90ed-0e44e7cd643e
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column introduced_date
+		dataType: string
+		lineageTag: 5a40b192-d4e5-4a2a-9c3a-e1f16eb88802
+		summarizeBy: none
+		sourceColumn: introduced_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_chamber
+		dataType: string
+		lineageTag: a67c9693-9880-4d17-923d-245bacdec81f
+		summarizeBy: none
+		sourceColumn: origin_chamber
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_chamber_code
+		dataType: string
+		lineageTag: a5f328b3-630d-427e-823c-bf985d8962ff
+		summarizeBy: none
+		sourceColumn: origin_chamber_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column update_date
+		dataType: string
+		lineageTag: 829767db-bf0f-4208-b49c-d9a00a23b8df
+		summarizeBy: none
+		sourceColumn: update_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column update_date_incl_text
+		dataType: string
+		lineageTag: b0958b9c-f1b2-4952-be74-5f022c285d30
+		summarizeBy: none
+		sourceColumn: update_date_incl_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column legislation_url
+		dataType: string
+		lineageTag: 382ceee0-a19f-4a40-a13a-77fdf0278758
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: legislation_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latest Action Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: a490258b-da31-4706-b7f8-e434b09beba5
+		summarizeBy: none
+		sourceColumn: Latest Action Date
+
+		variation Variation
+			isDefault
+			relationship: da03ab96-7a68-4fe3-92fe-40449612d689
+			defaultHierarchy: LocalDateTable_add97664-e22b-45fe-8714-adb88ff165a4.'Date Hierarchy'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column latest_action_time
+		dataType: string
+		lineageTag: 8758e475-6d51-4662-b54c-ed7907ddb00b
+		summarizeBy: none
+		sourceColumn: latest_action_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_action_text
+		dataType: string
+		lineageTag: 96491583-8285-4051-8b88-79306a0177bb
+		summarizeBy: none
+		sourceColumn: latest_action_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column policy_area
+		dataType: string
+		lineageTag: ce5ebe7d-6f21-44a6-87a5-7786de60c6e7
+		summarizeBy: none
+		sourceColumn: policy_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column cosponsor_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 2535fabf-83cf-4333-b3fb-d6fbd4200d0f
+		summarizeBy: sum
+		sourceColumn: cosponsor_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column cosponsor_count_incl_withdrawn
+		dataType: int64
+		formatString: 0
+		lineageTag: e33a0e1a-64a8-4494-950d-6f3378f605ca
+		summarizeBy: sum
+		sourceColumn: cosponsor_count_incl_withdrawn
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_summaries
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: dc4b6530-d9ad-4420-abd2-9fd93dc8d352
+		summarizeBy: none
+		sourceColumn: has_summaries
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_amendments
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2bf26a89-1d2e-436d-a54e-68d264636dd9
+		summarizeBy: none
+		sourceColumn: has_amendments
+
+		annotation SummarizationSetBy = Automatic
+
+	column schema_version
+		dataType: string
+		lineageTag: 551645f7-ead3-4d99-9de1-e19878206fbb
+		summarizeBy: none
+		sourceColumn: schema_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingested_at
+		dataType: string
+		lineageTag: c14b3925-351e-43b9-b6eb-51981e4d6f5c
+		summarizeBy: none
+		sourceColumn: ingested_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column
+		type: calculated
+		lineageTag: 21e3c409-b261-4d9b-b491-bf1d0f7b6045
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'congress_silver bills' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_bills = Source{[Schema="congress_silver",Item="bills"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(congress_silver_bills,{{"bill_id", "Bill"}, {"latest_action_date", "Latest Action Date"}, {"title", "Title"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,330 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "b0b269074e9f850586e9",
+  "position": {
+    "x": 38.821490467937608,
+    "y": 130.8838821490468,
+    "z": 1000,
+    "height": 562.35701906412476,
+    "width": 713.20623916811087,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "ForceGraph1449359463895",
+    "query": {
+      "queryState": {
+        "Source": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_edges"
+                    }
+                  },
+                  "Property": "source_name"
+                }
+              },
+              "queryRef": "congress_edges.source_name",
+              "nativeQueryRef": "source_name",
+              "active": true
+            }
+          ]
+        },
+        "LinkType": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_edges"
+                    }
+                  },
+                  "Property": "target_party"
+                }
+              },
+              "queryRef": "congress_edges.target_party",
+              "nativeQueryRef": "target_party"
+            }
+          ]
+        },
+        "TargetType": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_edges"
+                    }
+                  },
+                  "Property": "target_party"
+                }
+              },
+              "queryRef": "congress_edges.target_party",
+              "nativeQueryRef": "target_party"
+            }
+          ]
+        },
+        "Weight": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "congress_edges"
+                        }
+                      },
+                      "Property": "WeightCapped"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(congress_edges.WeightCapped)",
+              "nativeQueryRef": "Sum of WeightCapped"
+            }
+          ]
+        },
+        "Target": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_edges"
+                    }
+                  },
+                  "Property": "target_name"
+                }
+              },
+              "queryRef": "congress_edges.target_name",
+              "nativeQueryRef": "target_name",
+              "active": true
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "congress_edges"
+                      }
+                    },
+                    "Property": "WeightCapped"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "links": [
+        {
+          "properties": {
+            "colorLink": {
+              "expr": {
+                "Literal": {
+                  "Value": "'By Link Type'"
+                }
+              }
+            },
+            "thickenLink": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showArrow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showLabel": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "nodes": [
+        {
+          "properties": {
+            "defaultImage": {
+              "expr": {
+                "Literal": {
+                  "Value": "''"
+                }
+              }
+            },
+            "displayImage": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "highlightReachableLinks": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "animation": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "size": [
+        {
+          "properties": {
+            "charge": {
+              "expr": {
+                "Literal": {
+                  "Value": "-10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Network'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "38885100d500e956c3d0",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_edges"
+              }
+            },
+            "Property": "source_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b88f1d24cbaa487080ea",
+        "ordinal": 1,
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "congress_edges"
+                  }
+                },
+                "Property": "WeightCapped"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "043e37bbd7cb9a2e4e1e",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_edges"
+              }
+            },
+            "Property": "target_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "346133fca1803ec8388a",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_edges"
+              }
+            },
+            "Property": "target_party"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "da37f85aa9836c9c5aea",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_edges"
+              }
+            },
+            "Property": "weight"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}

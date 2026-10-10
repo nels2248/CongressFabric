@@ -1,0 +1,92 @@
+table congress_relatedbills
+	lineageTag: 98a3a17e-e7f6-40a8-a4f8-ccf4457adf35
+
+	measure '# Related Bills' = count(congress_relatedbills[bill_id])
+		formatString: #,0
+		lineageTag: 23587ab0-83e4-4f96-a609-9634e09719b0
+
+	column bill_id
+		dataType: string
+		lineageTag: ef0d4f7f-c13b-4fb1-9253-155eac735509
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column related_congress
+		dataType: string
+		lineageTag: a09885f2-10ba-4176-b7b9-4b4490a06624
+		summarizeBy: none
+		sourceColumn: related_congress
+
+		annotation SummarizationSetBy = Automatic
+
+	column related_type
+		dataType: string
+		lineageTag: e073fb59-5dac-4434-a3f9-21aa0a68a049
+		summarizeBy: none
+		sourceColumn: related_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column related_number
+		dataType: string
+		lineageTag: 3ee14da1-9939-4e87-8db3-cf18611259df
+		summarizeBy: none
+		sourceColumn: related_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column related_bill_id
+		dataType: string
+		lineageTag: 9e34ea95-5a33-4581-98f9-82f08f1349bf
+		summarizeBy: none
+		sourceColumn: related_bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_action_date
+		dataType: string
+		lineageTag: 91fd8b06-6629-4ccf-a237-0dc140ec3b3d
+		summarizeBy: none
+		sourceColumn: latest_action_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_action_text
+		dataType: string
+		lineageTag: 4e77585e-7297-4b24-8b26-bba8ef94e73a
+		summarizeBy: none
+		sourceColumn: latest_action_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column relationship_type
+		dataType: string
+		lineageTag: 0c680be7-2cd7-4bb0-88a3-acccd0d5d0cd
+		summarizeBy: none
+		sourceColumn: relationship_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column identified_by
+		dataType: string
+		lineageTag: 21ba0f08-e4da-4f65-a640-ca70a768fcf3
+		summarizeBy: none
+		sourceColumn: identified_by
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_relatedbills = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_related_bills = Source{[Schema="congress_silver",Item="related_bills"]}[Data]
+				in
+				    congress_silver_related_bills
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

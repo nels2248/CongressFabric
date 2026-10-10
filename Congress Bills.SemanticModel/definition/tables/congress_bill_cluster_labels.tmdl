@@ -1,0 +1,123 @@
+table congress_bill_cluster_labels
+	lineageTag: 8102c8e8-99a4-41df-b014-d0668218f6dc
+
+	column cluster
+		dataType: int64
+		formatString: 0
+		lineageTag: b09a87de-f725-414d-8571-36c5f091a8be
+		summarizeBy: sum
+		sourceColumn: cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_id
+		dataType: string
+		lineageTag: 382b47d9-462c-4453-9d29-410113f5560c
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		lineageTag: cf112424-ae22-4f15-8bd6-0820fa692512
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_type
+		dataType: string
+		lineageTag: 5ace9dd8-3cf6-4f56-bc25-f6436e167dc2
+		summarizeBy: none
+		sourceColumn: bill_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_chamber
+		dataType: string
+		lineageTag: 2c485a73-9302-488b-8d38-723410c56b03
+		summarizeBy: none
+		sourceColumn: origin_chamber
+
+		annotation SummarizationSetBy = Automatic
+
+	column policy_area
+		dataType: string
+		lineageTag: c4556c06-793f-4407-9355-ae46c8619866
+		summarizeBy: none
+		sourceColumn: policy_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_party
+		dataType: string
+		lineageTag: 43e8ba97-0002-4bd0-aa8f-237d35e2dbf9
+		summarizeBy: none
+		sourceColumn: sponsor_party
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_state
+		dataType: string
+		lineageTag: 0202404c-41f2-450a-9a65-6deaf5585d33
+		summarizeBy: none
+		sourceColumn: sponsor_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column introduced_date
+		dataType: string
+		lineageTag: 94f95c3e-f421-47fc-bc7a-853eadbbb274
+		summarizeBy: none
+		sourceColumn: introduced_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column cosponsor_count
+		dataType: int64
+		formatString: 0
+		lineageTag: e1c3d0b3-6a7f-442b-b89f-a8af2a812a53
+		summarizeBy: sum
+		sourceColumn: cosponsor_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_action_text
+		dataType: string
+		lineageTag: 3599e7fa-1526-409d-b662-f5bfaaf86d02
+		summarizeBy: none
+		sourceColumn: latest_action_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cluster Label'
+		dataType: string
+		lineageTag: 45bb2837-7e4e-4973-b94a-748f851f6545
+		summarizeBy: none
+		sourceColumn: Cluster Label
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Policy Domain (From Cluster)'
+		dataType: string
+		lineageTag: 7aa0502b-3a6c-4e5a-8849-0537af3651d7
+		summarizeBy: none
+		sourceColumn: Policy Domain (From Cluster)
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_bill_cluster_labels = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_gold_bill_cluster_labels_pbi = Source{[Schema="congress_gold",Item="bill_cluster_labels"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(congress_gold_bill_cluster_labels_pbi,{{"policy_domain", "Policy Domain (From Cluster)"}, {"cluster_label", "Cluster Label"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,240 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "3272e7c63eac38170ec9",
+  "position": {
+    "x": 17.8397212543554,
+    "y": 88.083623693379792,
+    "z": 0,
+    "height": 623.27526132404182,
+    "width": 1254.3554006968641,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_sponrsors"
+                    }
+                  },
+                  "Property": "party"
+                }
+              },
+              "queryRef": "congress_sponrsors.party",
+              "nativeQueryRef": "party",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_co_sponsors"
+                    }
+                  },
+                  "Property": "full_name"
+                }
+              },
+              "queryRef": "congress_co_sponsors.full_name",
+              "nativeQueryRef": "CoSponsor",
+              "active": true,
+              "displayName": "CoSponsor"
+            }
+          ],
+          "showAll": true
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_co_sponsors"
+                    }
+                  },
+                  "Property": "# Co Sponsors"
+                }
+              },
+              "queryRef": "congress_co_sponsors.# Co Sponsors",
+              "nativeQueryRef": "# Co Sponsors"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "congress_co_sponsors"
+                  }
+                },
+                "Property": "# Co Sponsors"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0.4
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e654bb0d21e3689da587",
+        "field": {
+          "Arithmetic": {
+            "Left": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "congress_co_sponsors"
+                  }
+                },
+                "Property": "# Co Sponsors"
+              }
+            },
+            "Right": {
+              "ScopedEval": {
+                "Expression": {
+                  "Measure": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "congress_co_sponsors"
+                      }
+                    },
+                    "Property": "# Co Sponsors"
+                  }
+                },
+                "Scope": [
+                  {
+                    "RoleRef": {
+                      "Role": "Columns"
+                    }
+                  }
+                ]
+              }
+            },
+            "Operator": 3
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "8f073a905ec59d7a8da4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_sponrsors"
+              }
+            },
+            "Property": "party"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "587f0ed8b0a69ea368d3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_co_sponsors"
+              }
+            },
+            "Property": "full_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ecc6d132c403ae9abe2e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_co_sponsors"
+              }
+            },
+            "Property": "# Co Sponsors"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

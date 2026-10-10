@@ -1,0 +1,97 @@
+relationship AutoDetected_c1907aec-b475-4195-a0f0-d781f1ccf998
+	fromColumn: congress_co_sponsors.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_668de464-90b5-4b80-a98d-1ccfc5895ae1
+	fromColumn: congress_actions.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_214c53c5-2675-4e18-85db-583d2579e010
+	fromColumn: congress_amendments.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_8e660d18-d7be-45cc-9d33-1b3e458ebc8c
+	fromColumn: congress_commitees.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_e8478dec-56c8-4445-983b-5821cc423c17
+	fromColumn: congress_relatedbills.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_496c4a1a-e5d8-428d-a971-3740efb0a1b6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: congress_sponrsors.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_5f12c481-6b82-40e5-96ee-0e71cb7ff8ea
+	fromColumn: congress_subjects.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_10fe1b62-c57f-4956-a598-025c87b15cf6
+	fromColumn: congress_summaries.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_c597fdc2-6895-47ea-8d0d-59a6de1e8672
+	fromColumn: congress_titles.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_e6f7b969-eb8c-4438-a559-4d44c284928a
+	fromColumn: congress_text_versions.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_5a7c9a03-f920-49f0-b770-6d92b76347b6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: congress_bill_ml.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_0d17d276-1087-4af3-b225-920b4621fe39
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: congress_bill_clusters.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_9357ac1a-109d-47fd-aedc-dc374674bfdb
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: congress_bill_cluster_labels.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship da03ab96-7a68-4fe3-92fe-40449612d689
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'congress_silver bills'.'Latest Action Date'
+	toColumn: LocalDateTable_add97664-e22b-45fe-8714-adb88ff165a4.Date
+
+relationship AutoDetected_897eb39c-bf14-45e6-9a33-fb6ac09d4048
+	fromColumn: congress_bill_clusters.cluster
+	toColumn: congress_bill_cluster_summary.cluster
+
+relationship AutoDetected_b329d669-de21-446b-a085-82643ee148ce
+	isActive: false
+	fromColumn: congress_bill_cluster_labels.cluster
+	toColumn: congress_bill_cluster_summary.cluster
+
+relationship AutoDetected_d04eea59-918d-4bbb-b897-a4ff8a38b5d5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: congress_bill_predictions.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_5cc6d3c5-66ad-4d2c-8e5f-8b52b6e2d5c6
+	fromColumn: congress_bill_shap_values.bill_id
+	toColumn: 'congress_silver bills'.Bill
+
+relationship AutoDetected_a3440c86-0b40-4462-bb57-f0bb7a43cd96
+	fromColumn: congress_bill_shap_values.Feature
+	toColumn: congress_bill_feature_importance.feature
+
+relationship AutoDetected_2180493c-0f61-4e70-879e-2357603026b9
+	fromColumn: congress_co_sponsors.bioguide_id
+	toColumn: congress_nodes.bioguide_id
+
+relationship AutoDetected_db63169c-33f7-468a-bf5a-ec547fe0e964
+	isActive: false
+	fromColumn: congress_sponrsors.bioguide_id
+	toColumn: congress_nodes.bioguide_id
+

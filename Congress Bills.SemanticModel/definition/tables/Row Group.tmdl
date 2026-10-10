@@ -1,0 +1,53 @@
+table 'Row Group'
+	lineageTag: 97db1df4-4a9d-4bf2-b3bc-4c0b1fcca986
+
+	column 'Row Group'
+		lineageTag: 43c0781c-037a-485a-acc1-6c2baa114712
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		isHidden
+		lineageTag: 05cee55f-a54d-4137-b66b-35e70a455909
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: 25391c9d-0451-4509-a287-664c0ba46e25
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Row Group' = calculated
+		mode: import
+		source = ```
+				{
+				    ("Sponsor", NAMEOF('congress_sponrsors'[Sponsor]), 0),
+				    ("Sponsor Party", NAMEOF('congress_sponrsors'[party]), 1),
+				    ("State", NAMEOF('congress_sponrsors'[state]), 2),
+				    ("Bill Status", NAMEOF('congress_bill_ml'[Bill Status]), 3),
+				    ("Policy Area", NAMEOF('congress_bill_ml'[Policy Area]), 4),
+				    ("Cluster Labels", NAMEOF('congress_bill_cluster_labels'[Cluster Label]), 5) 
+				}
+				```
+
+	annotation PBI_Id = ce4ad80f2cea41d1a3c301938c6cb2cf
+

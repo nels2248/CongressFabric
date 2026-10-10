@@ -1,0 +1,125 @@
+table congress_actions
+	lineageTag: a1b4f508-e725-40a0-ad39-eb9410f9eaa7
+
+	measure '# Actions' = count(congress_actions[bill_id])
+		formatString: #,0
+		lineageTag: c2d13960-1ea6-46b5-8817-30ee88b9d496
+
+	column bill_id
+		dataType: string
+		lineageTag: e9953cc4-f61f-483a-9e86-6a1728e62dfb
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_seq
+		dataType: int64
+		formatString: 0
+		lineageTag: c8bb1e08-95bf-4af4-99cc-373e1da9dbe9
+		summarizeBy: sum
+		sourceColumn: action_seq
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_date
+		dataType: string
+		lineageTag: 81f3521c-b539-40be-a2cb-205a366fcc44
+		summarizeBy: none
+		sourceColumn: action_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_time
+		dataType: string
+		lineageTag: ed1ed368-152c-4595-aa42-5c8b85bcf3a6
+		summarizeBy: none
+		sourceColumn: action_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_code
+		dataType: string
+		lineageTag: 69956636-9415-49dd-a38a-9394cda08f46
+		summarizeBy: none
+		sourceColumn: action_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_type
+		dataType: string
+		lineageTag: 8218544f-b8f6-40ef-81dc-edce96acabf6
+		summarizeBy: none
+		sourceColumn: action_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_text
+		dataType: string
+		lineageTag: da044a73-f55f-49ee-8431-130a18605f53
+		summarizeBy: none
+		sourceColumn: action_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system_name
+		dataType: string
+		lineageTag: ef7d916c-2a74-4800-b40f-dbef3e4c6c41
+		summarizeBy: none
+		sourceColumn: source_system_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_system_code
+		dataType: string
+		lineageTag: 9791e98c-5308-4c8b-b4a3-c334fb14a060
+		summarizeBy: none
+		sourceColumn: source_system_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column roll_number
+		dataType: string
+		lineageTag: e2a774d6-d4ee-43f9-be67-257231ededa9
+		summarizeBy: none
+		sourceColumn: roll_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column vote_chamber
+		dataType: string
+		lineageTag: f3d024c0-697e-4ad9-ba53-4a256b02f234
+		summarizeBy: none
+		sourceColumn: vote_chamber
+
+		annotation SummarizationSetBy = Automatic
+
+	column vote_date
+		dataType: string
+		lineageTag: e72a3075-1fba-4f3a-b75c-8f01385205fb
+		summarizeBy: none
+		sourceColumn: vote_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column vote_url
+		dataType: string
+		lineageTag: fe8c6a0f-67c6-4278-82b0-913c9cd3b8a3
+		summarizeBy: none
+		sourceColumn: vote_url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_actions = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_actions = Source{[Schema="congress_silver",Item="actions"]}[Data]
+				in
+				    congress_silver_actions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

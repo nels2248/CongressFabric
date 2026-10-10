@@ -1,0 +1,61 @@
+table congress_bill_shap_values
+	lineageTag: bdef9fb3-a7c3-4c4a-b180-5abba8f7b468
+
+	measure 'Sum Shap' = sum(congress_bill_shap_values[Contribution Weight])
+		lineageTag: 8be2f592-ccca-481d-8ce4-2534a5930e63
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sum Shap Abs' = abs([Sum Shap])
+		lineageTag: b6701dee-ec91-4e4d-8b88-a64130c9ab1f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column bill_id
+		dataType: string
+		lineageTag: 75da7cf3-22f7-450d-a7a4-e9409640d0fe
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feature
+		dataType: string
+		lineageTag: f8e3bbd7-b89a-4018-929d-6a3c4fe95050
+		summarizeBy: none
+		sourceColumn: Feature
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contribution Weight'
+		dataType: double
+		formatString: 0.0000000
+		lineageTag: bae9f73e-53ec-4df5-9727-5f609146e7c5
+		summarizeBy: sum
+		sourceColumn: Contribution Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'Absolute Contribution Weight' = abs(congress_bill_shap_values[Contribution Weight])
+		formatString: 0.000000000
+		lineageTag: d44ae914-ae23-4421-a6f3-541bf4a377c9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_bill_shap_values = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_gold_bill_shap_values = Source{[Schema="congress_gold",Item="bill_shap_values"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(congress_gold_bill_shap_values,{{"feature", "Feature"}, {"shap_value", "Contribution Weight"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

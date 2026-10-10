@@ -1,0 +1,68 @@
+table congress_summaries
+	lineageTag: e902c680-6015-4530-b37c-5b9e7a98d1a0
+
+	measure '# Summaries' = count(congress_summaries[bill_id])
+		formatString: #,0
+		lineageTag: 0858fb0e-21bc-4f96-a92f-e3486572783e
+
+	column bill_id
+		dataType: string
+		lineageTag: 36b41f56-dde0-429b-9b7e-2b3832caafdd
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column version_code
+		dataType: string
+		lineageTag: 9b5511f1-0f69-4f79-a7be-4c6a13864426
+		summarizeBy: none
+		sourceColumn: version_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_date
+		dataType: string
+		lineageTag: 1da832d8-ae31-4461-9151-ec8caf58e74c
+		summarizeBy: none
+		sourceColumn: action_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_desc
+		dataType: string
+		lineageTag: 706ca536-791b-4bcc-a187-bd5af6b5014c
+		summarizeBy: none
+		sourceColumn: action_desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column update_date
+		dataType: string
+		lineageTag: 43b98ac7-8d76-49e1-a525-41e0821548e2
+		summarizeBy: none
+		sourceColumn: update_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column summary_text
+		dataType: string
+		lineageTag: b89a5abd-acf1-494a-96f1-866e7274e487
+		summarizeBy: none
+		sourceColumn: summary_text
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_summaries = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_summaries = Source{[Schema="congress_silver",Item="summaries"]}[Data]
+				in
+				    congress_silver_summaries
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Congress Bills"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "78ef605a-2eed-81b7-4d30-4e5572fc03c1"
+  }
+}

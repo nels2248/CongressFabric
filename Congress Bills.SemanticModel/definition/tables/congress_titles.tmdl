@@ -1,0 +1,84 @@
+table congress_titles
+	lineageTag: 1c6340de-7d5a-4110-bf18-dca991c390dd
+
+	measure '# Titles' = count(congress_titles[bill_id])
+		formatString: #,0
+		lineageTag: f3f62447-28ec-4907-836b-940d401af955
+
+	column bill_id
+		dataType: string
+		lineageTag: 37c618a9-f385-486b-96dc-f3e78fab5cde
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column title_type
+		dataType: string
+		lineageTag: c6188638-d2ba-4bd4-b987-31a4d85422dc
+		summarizeBy: none
+		sourceColumn: title_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column title_type_code
+		dataType: string
+		lineageTag: cf1f7c4e-e17e-4081-95c4-6e5e41c650bc
+		summarizeBy: none
+		sourceColumn: title_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		lineageTag: c7118eab-8b9c-4ed3-849e-877efe7e3260
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column chamber
+		dataType: string
+		lineageTag: cb2002f3-f06f-499e-849a-acc11316fb86
+		summarizeBy: none
+		sourceColumn: chamber
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_text_version_name
+		dataType: string
+		lineageTag: e907c2cc-f210-45a9-92d0-f97adc1180ac
+		summarizeBy: none
+		sourceColumn: bill_text_version_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_text_version_code
+		dataType: string
+		lineageTag: 23d919e1-4632-46c7-a31e-aa74a8e4f648
+		summarizeBy: none
+		sourceColumn: bill_text_version_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column update_date
+		dataType: string
+		lineageTag: 5661ef07-9325-47fd-82c9-d3b4635766f7
+		summarizeBy: none
+		sourceColumn: update_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_titles = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_titles = Source{[Schema="congress_silver",Item="titles"]}[Data]
+				in
+				    congress_silver_titles
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

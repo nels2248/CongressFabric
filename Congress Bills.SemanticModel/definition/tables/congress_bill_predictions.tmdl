@@ -1,0 +1,53 @@
+table congress_bill_predictions
+	lineageTag: 109edb7b-7283-4f4c-8f97-081901253376
+
+	column bill_id
+		dataType: string
+		lineageTag: 1879d4be-7f6b-4f0b-80c4-7d6fcae6de9e
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column target
+		dataType: int64
+		formatString: 0
+		lineageTag: 6a0e2669-f7b0-4e33-831e-4929f901f529
+		summarizeBy: sum
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column prediction
+		dataType: double
+		lineageTag: 6b3adc26-9786-4f44-9e89-640dbc62b070
+		summarizeBy: sum
+		sourceColumn: prediction
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Probability of Passing House/Senate or Becoming Law'
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 5cbbaaf6-c1b3-4c48-a4c5-7c4b81fe5f51
+		summarizeBy: sum
+		sourceColumn: Probability of Passing House/Senate or Becoming Law
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_bill_predictions = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_gold_bill_predictions = Source{[Schema="congress_gold",Item="bill_predictions"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(congress_gold_bill_predictions,{{"prob_pass", "Probability of Passing House/Senate or Becoming Law"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

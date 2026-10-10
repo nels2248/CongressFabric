@@ -1,0 +1,34 @@
+table congress_bill_feature_importance
+	lineageTag: f3d6677e-f4ac-4167-8e91-df50d358fc8b
+
+	column feature
+		dataType: string
+		lineageTag: f20c08cb-470c-45af-8fc4-28929f0d7bb5
+		summarizeBy: none
+		sourceColumn: feature
+
+		annotation SummarizationSetBy = Automatic
+
+	column importance
+		dataType: double
+		lineageTag: 40173c09-1445-4f4d-90e2-6fd6be177447
+		summarizeBy: none
+		sourceColumn: importance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition congress_bill_feature_importance = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_gold_bill_feature_importance = Source{[Schema="congress_gold",Item="bill_feature_importance"]}[Data]
+				in
+				    congress_gold_bill_feature_importance
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

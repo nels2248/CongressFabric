@@ -1,0 +1,249 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "3227bd70e27742eb2a09",
+  "position": {
+    "x": 17.949167397020158,
+    "y": 88.624014022787037,
+    "z": 0,
+    "height": 622.61174408413672,
+    "width": 1244.1016652059598,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_nodes"
+                    }
+                  },
+                  "Property": "full_name"
+                }
+              },
+              "queryRef": "congress_nodes.full_name",
+              "nativeQueryRef": "Person",
+              "displayName": "Person"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_nodes"
+                    }
+                  },
+                  "Property": "party"
+                }
+              },
+              "queryRef": "congress_nodes.party",
+              "nativeQueryRef": "Party",
+              "displayName": "Party"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_nodes"
+                    }
+                  },
+                  "Property": "degree_centrality"
+                }
+              },
+              "queryRef": "congress_nodes.degree_centrality",
+              "nativeQueryRef": "Degree Centrality",
+              "displayName": "Degree Centrality"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_nodes"
+                    }
+                  },
+                  "Property": "eigenvector_centrality"
+                }
+              },
+              "queryRef": "congress_nodes.eigenvector_centrality",
+              "nativeQueryRef": "Eigenvector Centrality",
+              "displayName": "Eigenvector Centrality"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_nodes"
+                    }
+                  },
+                  "Property": "betweenness_centrality"
+                }
+              },
+              "queryRef": "congress_nodes.betweenness_centrality",
+              "nativeQueryRef": "Betweeness Centrality",
+              "displayName": "Betweeness Centrality"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "congress_nodes"
+                  }
+                },
+                "Property": "betweenness_centrality"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0.4
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4dc10b7e09130c01ae14",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_nodes"
+              }
+            },
+            "Property": "full_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "15b3c4a0690c6c209cc8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_nodes"
+              }
+            },
+            "Property": "party"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1b3b9214705554add0c3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_nodes"
+              }
+            },
+            "Property": "degree_centrality"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4d4c890b10e047d92adb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_nodes"
+              }
+            },
+            "Property": "eigenvector_centrality"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "89afad808001a46dd347",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "congress_nodes"
+              }
+            },
+            "Property": "betweenness_centrality"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

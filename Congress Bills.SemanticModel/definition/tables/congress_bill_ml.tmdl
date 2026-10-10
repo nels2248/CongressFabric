@@ -1,0 +1,172 @@
+table congress_bill_ml
+	lineageTag: 7280ee52-2062-4196-8ed5-f85f305d291f
+
+	column bill_id
+		dataType: string
+		lineageTag: 4f2fcea0-c279-4206-87f7-c0cc372c694f
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column congress
+		dataType: string
+		lineageTag: 339fca49-d85d-47df-8ca0-873ac8f6a755
+		summarizeBy: none
+		sourceColumn: congress
+
+		annotation SummarizationSetBy = Automatic
+
+	column bill_type
+		dataType: string
+		lineageTag: a07b596a-f808-4d1c-967f-a53c00ff3774
+		summarizeBy: none
+		sourceColumn: bill_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column origin_chamber
+		dataType: string
+		lineageTag: 39ef393e-db64-448e-b225-d6f2caa9b7e6
+		summarizeBy: none
+		sourceColumn: origin_chamber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Policy Area'
+		dataType: string
+		lineageTag: 139df4e0-a50a-40e8-82e0-c0c74d81b5b9
+		summarizeBy: none
+		sourceColumn: Policy Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column introduced_date
+		dataType: string
+		lineageTag: fdf74b5b-3768-4293-b043-4c19252e9696
+		summarizeBy: none
+		sourceColumn: introduced_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column cosponsor_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 41f6999e-4192-4260-905c-8d91ed6dae84
+		summarizeBy: sum
+		sourceColumn: cosponsor_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b9ac1e5-eeef-4cc9-972b-dfc80e64c6be
+		summarizeBy: sum
+		sourceColumn: action_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column committee_count
+		dataType: int64
+		formatString: 0
+		lineageTag: d9121fe8-be3c-4409-832b-b4c0fcb771a9
+		summarizeBy: sum
+		sourceColumn: committee_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_is_republican
+		dataType: int64
+		formatString: 0
+		lineageTag: 5cec5170-e13e-4d6b-a87a-13f064d3c547
+		summarizeBy: sum
+		sourceColumn: sponsor_is_republican
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_is_democrat
+		dataType: int64
+		formatString: 0
+		lineageTag: 747efaca-cb7d-439c-ba1c-aa192a054d57
+		summarizeBy: sum
+		sourceColumn: sponsor_is_democrat
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_is_senator
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e2ff9ca-72e9-4cc1-adf3-2cae2afb1f52
+		summarizeBy: sum
+		sourceColumn: sponsor_is_senator
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bill Status'
+		dataType: string
+		lineageTag: 4e37735f-577b-4320-a9e5-1e50075310d0
+		summarizeBy: none
+		sourceColumn: Bill Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column amendment_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 86793807-e8fe-4ad1-bb4e-269d76a0059f
+		summarizeBy: sum
+		sourceColumn: amendment_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column related_bills_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 355120d2-70ff-42c6-ac6a-11da6ed0097f
+		summarizeBy: sum
+		sourceColumn: related_bills_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column subjects_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 64a5b5ac-576d-4b8c-a4df-b9831d93711d
+		summarizeBy: sum
+		sourceColumn: subjects_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column text_versions_count
+		dataType: int64
+		formatString: 0
+		lineageTag: bf5cc831-9ff9-4e4e-8ba1-6d302ddd87ae
+		summarizeBy: sum
+		sourceColumn: text_versions_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column title_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 6cd856c5-8bca-4fbd-ae1e-a43476e0b0b0
+		summarizeBy: sum
+		sourceColumn: title_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_bill_ml = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_gold_bill_ml_features = Source{[Schema="congress_gold",Item="bill_ml_features"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(congress_gold_bill_ml_features,{{"bill_status_label", "Bill Status"}, {"policy_area", "Policy Area"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

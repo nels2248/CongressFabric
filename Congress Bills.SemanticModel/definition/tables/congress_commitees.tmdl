@@ -1,0 +1,70 @@
+table congress_commitees
+	lineageTag: 90f67a42-dfda-4dd9-a611-4d7b7b81ab41
+
+	measure '# Commitees' = ```
+			count(congress_commitees[bill_id]) 
+			```
+		formatString: #,0
+		lineageTag: 0a80e1d6-0a0b-4944-9a47-9a8401d2fda3
+
+	column bill_id
+		dataType: string
+		lineageTag: 4ece73b8-5dff-4159-95dc-c5a267b5a9a7
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column system_code
+		dataType: string
+		lineageTag: 86d19a08-b95e-4a78-9dbf-6dea1ab47254
+		summarizeBy: none
+		sourceColumn: system_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column committee_name
+		dataType: string
+		lineageTag: b467e852-3d63-45f5-98b5-57e601f5b3dd
+		summarizeBy: none
+		sourceColumn: committee_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column chamber
+		dataType: string
+		lineageTag: 75909f09-b22c-4a57-b4dd-52c00fe87629
+		summarizeBy: none
+		sourceColumn: chamber
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_name
+		dataType: string
+		lineageTag: f8ccef40-d0bc-4e56-8d96-1a336ce6a25d
+		summarizeBy: none
+		sourceColumn: activity_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_date
+		dataType: string
+		lineageTag: 03fd55bd-d690-4366-b540-42a060a4cf7e
+		summarizeBy: none
+		sourceColumn: activity_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_commitees = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_committees = Source{[Schema="congress_silver",Item="committees"]}[Data]
+				in
+				    congress_silver_committees
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

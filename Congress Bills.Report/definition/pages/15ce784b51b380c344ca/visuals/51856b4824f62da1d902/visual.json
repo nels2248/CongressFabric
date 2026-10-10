@@ -1,0 +1,557 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "51856b4824f62da1d902",
+  "position": {
+    "x": 17.8397212543554,
+    "y": 88.083623693379792,
+    "z": 0,
+    "height": 623.27526132404182,
+    "width": 1254.3554006968641,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_silver bills"
+                    }
+                  },
+                  "Property": "Bill"
+                }
+              },
+              "queryRef": "congress_silver bills.bill_id",
+              "nativeQueryRef": "Bill",
+              "displayName": "Bill"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_silver bills"
+                    }
+                  },
+                  "Property": "Latest Action Date"
+                }
+              },
+              "queryRef": "congress_silver bills.latest_action_date",
+              "nativeQueryRef": "Latest Action Date",
+              "displayName": "Latest Action Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_bill_ml"
+                    }
+                  },
+                  "Property": "Bill Status"
+                }
+              },
+              "queryRef": "congress_bill_ml.bill_status_label",
+              "nativeQueryRef": "Bill Status",
+              "displayName": "Bill Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_silver bills"
+                    }
+                  },
+                  "Property": "Title"
+                }
+              },
+              "queryRef": "congress_silver bills.title",
+              "nativeQueryRef": "Title",
+              "displayName": "Title"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_sponrsors"
+                    }
+                  },
+                  "Property": "Sponsor"
+                }
+              },
+              "queryRef": "congress_sponrsors.full_name",
+              "nativeQueryRef": "Sponsor",
+              "displayName": "Sponsor"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_bill_ml"
+                    }
+                  },
+                  "Property": "Policy Area"
+                }
+              },
+              "queryRef": "congress_bill_ml.policy_area",
+              "nativeQueryRef": "Policy Area",
+              "displayName": "Policy Area"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_bill_cluster_labels"
+                    }
+                  },
+                  "Property": "Cluster Label"
+                }
+              },
+              "queryRef": "congress_bill_cluster_labels.cluster_label",
+              "nativeQueryRef": "Cluster Label"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_silver bills"
+                    }
+                  },
+                  "Property": "legislation_url"
+                }
+              },
+              "queryRef": "congress_silver bills.legislation_url",
+              "nativeQueryRef": "Bill Url",
+              "displayName": "Bill Url"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_bill_predictions"
+                    }
+                  },
+                  "Property": "Probability of Passing House/Senate or Becoming Law"
+                }
+              },
+              "queryRef": "Sum(congress_bill_predictions.prob_pass)",
+              "nativeQueryRef": "Probability of Passing House/Senate or Becoming Law"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_silver bills"
+                    }
+                  },
+                  "Property": "# Bills"
+                }
+              },
+              "queryRef": "congress_silver bills.# Bills",
+              "nativeQueryRef": "# Bills"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_actions"
+                    }
+                  },
+                  "Property": "# Actions"
+                }
+              },
+              "queryRef": "congress_actions.# Actions",
+              "nativeQueryRef": "# Actions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_co_sponsors"
+                    }
+                  },
+                  "Property": "# Co Sponsors"
+                }
+              },
+              "queryRef": "congress_co_sponsors.# Co Sponsors",
+              "nativeQueryRef": "# Co Sponsors"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_amendments"
+                    }
+                  },
+                  "Property": "# Amendments"
+                }
+              },
+              "queryRef": "congress_amendments.# Amendments",
+              "nativeQueryRef": "# Amendments"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_commitees"
+                    }
+                  },
+                  "Property": "# Commitees"
+                }
+              },
+              "queryRef": "congress_commitees.# Commitees",
+              "nativeQueryRef": "# Commitees"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_relatedbills"
+                    }
+                  },
+                  "Property": "# Related Bills"
+                }
+              },
+              "queryRef": "congress_relatedbills.# Related Bills",
+              "nativeQueryRef": "# Related Bills"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_subjects"
+                    }
+                  },
+                  "Property": "# Subjects"
+                }
+              },
+              "queryRef": "congress_subjects.# Subjects",
+              "nativeQueryRef": "# Subjects"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_summaries"
+                    }
+                  },
+                  "Property": "# Summaries"
+                }
+              },
+              "queryRef": "congress_summaries.# Summaries",
+              "nativeQueryRef": "# Summaries"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_titles"
+                    }
+                  },
+                  "Property": "# Titles"
+                }
+              },
+              "queryRef": "congress_titles.# Titles",
+              "nativeQueryRef": "# Titles"
+            }
+          ],
+          "showAll": true
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "congress_silver bills"
+                  }
+                },
+                "Property": "Latest Action Date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "74.30719547298187D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_silver bills.title"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "74.83278380800178D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_sponrsors.full_name"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "62.368496882164784D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_bill_ml.bill_status_label"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "71.44518538914836D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_silver bills.latest_action_date"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "66.75988994954032D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_amendments.# Amendments"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76.62297108003418D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_commitees.# Commitees"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "67.60449934025955D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_summaries.# Summaries"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "59.038178926985395D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_silver bills.bill_id"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61.30898353508733D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_bill_ml.policy_area"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "60.08014289180345D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_actions.# Actions"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77.70034843205575D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_co_sponsors.# Co Sponsors"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77.81532227297568D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_relatedbills.# Related Bills"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "73.95612263665129D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_bill_cluster_labels.cluster_label"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "102.0182451220252D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(congress_bill_predictions.prob_pass)"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0.4
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

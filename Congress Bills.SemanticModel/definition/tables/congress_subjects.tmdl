@@ -1,0 +1,46 @@
+table congress_subjects
+	lineageTag: 445bab89-39ef-4c19-90bd-d2963b16e6c9
+
+	measure '# Subjects' = ```
+			count(congress_subjects[bill_id]) 
+			```
+		formatString: #,0
+		lineageTag: 18920309-69ca-48d0-8f59-4923a4fc62cf
+
+	column bill_id
+		dataType: string
+		lineageTag: 23e177f3-b742-4720-bb76-c5820ee4990f
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column subject_type
+		dataType: string
+		lineageTag: 60f638fa-18ab-4a07-b16e-48d9c82f268b
+		summarizeBy: none
+		sourceColumn: subject_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column subject_name
+		dataType: string
+		lineageTag: 78600e6a-a42d-4238-82cf-75cc3768eb82
+		summarizeBy: none
+		sourceColumn: subject_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_subjects = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_subjects = Source{[Schema="congress_silver",Item="subjects"]}[Data]
+				in
+				    congress_silver_subjects
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

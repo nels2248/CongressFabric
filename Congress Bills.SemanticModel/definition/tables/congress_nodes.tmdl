@@ -1,0 +1,76 @@
+table congress_nodes
+	lineageTag: 714793d2-0bd1-4ce1-b885-4fb0a00d1a92
+
+	column bioguide_id
+		dataType: string
+		lineageTag: 3659b4e1-a9f1-4b08-aa3f-5731dac627b5
+		summarizeBy: none
+		sourceColumn: bioguide_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		lineageTag: eb89a54e-349c-4b76-8237-da64d7d160ce
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column party
+		dataType: string
+		lineageTag: d5d7619c-931d-4513-9bad-4c8aa417e168
+		summarizeBy: none
+		sourceColumn: party
+
+		annotation SummarizationSetBy = Automatic
+
+	column degree_centrality
+		dataType: double
+		formatString: 0.00000
+		lineageTag: b4c16a25-752d-4b00-9571-313a8a659b32
+		summarizeBy: none
+		sourceColumn: degree_centrality
+
+		annotation SummarizationSetBy = Automatic
+
+	column betweenness_centrality
+		dataType: double
+		formatString: 0.00000
+		lineageTag: c8d64f3a-0033-4fd6-ac63-2363a4609ff7
+		summarizeBy: none
+		sourceColumn: betweenness_centrality
+
+		annotation SummarizationSetBy = Automatic
+
+	column eigenvector_centrality
+		dataType: double
+		formatString: 0.00000
+		lineageTag: b6b7700d-1525-4f40-8f3c-26d1c47bd241
+		summarizeBy: none
+		sourceColumn: eigenvector_centrality
+
+		annotation SummarizationSetBy = Automatic
+
+	column community_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ee5d126-77d3-46d9-95b5-1092b4911649
+		summarizeBy: none
+		sourceColumn: community_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_nodes = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_gold_network_nodes = Source{[Schema="congress_gold",Item="network_nodes"]}[Data]
+				in
+				    congress_gold_network_nodes
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

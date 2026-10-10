@@ -1,0 +1,97 @@
+table congress_sponrsors
+	lineageTag: 1e4207fd-8efa-4545-898c-a7625cc0db75
+
+	column bill_id
+		dataType: string
+		lineageTag: 567e43b3-87d1-419f-acc6-9f27baddbb3b
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column bioguide_id
+		dataType: string
+		lineageTag: 182bdd8a-f6bb-41cf-9e74-d1bc75017ccd
+		summarizeBy: none
+		sourceColumn: bioguide_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sponsor
+		dataType: string
+		lineageTag: 5a983f28-46b2-4c7e-837b-0efcf867698c
+		summarizeBy: none
+		sourceColumn: Sponsor
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: 0296f08d-abee-4d12-967b-05ec59edd00f
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column middle_name
+		dataType: string
+		lineageTag: fab42e1c-48f1-4d2f-9e1f-4d5bbcb164e0
+		summarizeBy: none
+		sourceColumn: middle_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: b9bff8e5-5205-4667-ab03-212a6cc47162
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column party
+		dataType: string
+		lineageTag: 823cd8fc-5d29-425c-bffd-2474a145331c
+		summarizeBy: none
+		sourceColumn: party
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 90d42159-f163-498b-a32b-978af2484279
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column district
+		dataType: string
+		lineageTag: 759be569-1e75-4ed3-8f0a-673194aec5b9
+		summarizeBy: none
+		sourceColumn: district
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_by_request
+		dataType: string
+		lineageTag: 99b1d9b3-5ca3-4b97-ac87-f2ad84de3ef0
+		summarizeBy: none
+		sourceColumn: is_by_request
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_sponrsors = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_sponsors = Source{[Schema="congress_silver",Item="sponsors"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(congress_silver_sponsors,{{"full_name", "Sponsor"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

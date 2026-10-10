@@ -1,0 +1,242 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "397b5d5d5c81ae288c52",
+  "position": {
+    "x": 15.316239316239317,
+    "y": 83.145299145299148,
+    "z": 1000,
+    "height": 622.49572649572644,
+    "width": 555.76068376068372,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_silver bills"
+                    }
+                  },
+                  "Property": "Bill"
+                }
+              },
+              "queryRef": "congress_silver bills.Bill",
+              "nativeQueryRef": "Bill"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_silver bills"
+                    }
+                  },
+                  "Property": "Title"
+                }
+              },
+              "queryRef": "congress_silver bills.Title",
+              "nativeQueryRef": "Title"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_bill_ml"
+                    }
+                  },
+                  "Property": "Bill Status"
+                }
+              },
+              "queryRef": "congress_bill_ml.Bill Status",
+              "nativeQueryRef": "Bill Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "congress_bill_predictions"
+                    }
+                  },
+                  "Property": "Probability of Passing House/Senate or Becoming Law"
+                }
+              },
+              "queryRef": "Sum(congress_bill_predictions.prob_pass)",
+              "nativeQueryRef": "prob_pass"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "congress_bill_predictions"
+                  }
+                },
+                "Property": "Probability of Passing House/Senate or Becoming Law"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0.4
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'fixedWidth'"
+                }
+              }
+            },
+            "defaultColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "181.6685450816825D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_silver bills.Title"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "96.3540592049792D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_bill_ml.Bill Status"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "122.33892211552347D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "congress_silver bills.Bill"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "121.25420748214222D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(congress_bill_predictions.prob_pass)"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

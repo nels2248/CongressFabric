@@ -1,0 +1,206 @@
+[
+  {
+    "name": "titles",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/titles",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "text_versions",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/text_versions",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "summaries",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/summaries",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "subjects",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/subjects",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "sponsors",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/sponsors",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "related_bills",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/related_bills",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "cosponsors",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/cosponsors",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "committees",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/committees",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "bills",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/bills",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "amendments",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/amendments",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "actions",
+    "path": "/Tables/congress_silver",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/silver/actions",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "member_activity",
+    "path": "/Tables/congress_gold",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/gold/member_activity",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "committee_workload",
+    "path": "/Tables/congress_gold",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/gold/committee_workload",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "bills_master",
+    "path": "/Tables/congress_gold",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/gold/bills_master",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "bill_ml_features",
+    "path": "/Tables/congress_gold",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/gold/bill_ml_features",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "action_timeline",
+    "path": "/Tables/congress_gold",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/gold/action_timeline",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "raw_xml",
+    "path": "/Tables/congress_bronze",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/congress/bronze/raw_xml",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+]

@@ -1,0 +1,172 @@
+table congress_amendments
+	lineageTag: 96dda702-6e23-4630-9ebb-11e69a234df5
+
+	measure '# Amendments' = count(congress_amendments[bill_id])
+		formatString: #,0
+		lineageTag: 70cfef67-77d8-41fb-ab68-91c75430bb0d
+
+	column bill_id
+		dataType: string
+		lineageTag: 192f95bf-4c24-44db-9afa-eaf40fdedeb6
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column amendment_number
+		dataType: string
+		lineageTag: fd432439-71ae-4661-9356-dbc2ba133c83
+		summarizeBy: none
+		sourceColumn: amendment_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column amendment_type
+		dataType: string
+		lineageTag: 852e8106-afed-498e-9594-622c5e909446
+		summarizeBy: none
+		sourceColumn: amendment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column congress
+		dataType: string
+		lineageTag: 3a1f00e4-5104-4cdf-b57a-a6fa06fd78c2
+		summarizeBy: none
+		sourceColumn: congress
+
+		annotation SummarizationSetBy = Automatic
+
+	column chamber
+		dataType: string
+		lineageTag: b8d50a01-64df-40da-9e87-989aa59eacc4
+		summarizeBy: none
+		sourceColumn: chamber
+
+		annotation SummarizationSetBy = Automatic
+
+	column submitted_date
+		dataType: string
+		lineageTag: 9e50c0a6-303d-4202-b58b-756073033de7
+		summarizeBy: none
+		sourceColumn: submitted_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column proposed_date
+		dataType: string
+		lineageTag: 5272a3d8-486e-4e0c-b6bb-22852ab6b995
+		summarizeBy: none
+		sourceColumn: proposed_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column purpose
+		dataType: string
+		lineageTag: 533864b6-7a76-43f4-8e8e-d873a6ca4852
+		summarizeBy: none
+		sourceColumn: purpose
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 3d0f8b66-5aa9-4214-8735-a6c85b38f634
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_bioguide_id
+		dataType: string
+		lineageTag: b071c605-fe6c-406a-9f15-2d517dc2dafc
+		summarizeBy: none
+		sourceColumn: sponsor_bioguide_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_full_name
+		dataType: string
+		lineageTag: ad8aa76a-7322-4f22-a007-6ea5926fed36
+		summarizeBy: none
+		sourceColumn: sponsor_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_party
+		dataType: string
+		lineageTag: 1f7e3f38-b46b-4beb-a705-dcb172985f9e
+		summarizeBy: none
+		sourceColumn: sponsor_party
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsor_state
+		dataType: string
+		lineageTag: dfe8f800-1769-4475-95b1-448ec5de8ec6
+		summarizeBy: none
+		sourceColumn: sponsor_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column amended_bill_congress
+		dataType: string
+		lineageTag: f7040f95-cb8e-4663-97bc-e00f12485d23
+		summarizeBy: none
+		sourceColumn: amended_bill_congress
+
+		annotation SummarizationSetBy = Automatic
+
+	column amended_bill_type
+		dataType: string
+		lineageTag: 2e117ce4-ffd0-4222-83c6-01a8a923be25
+		summarizeBy: none
+		sourceColumn: amended_bill_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column amended_bill_number
+		dataType: string
+		lineageTag: cc48e2a4-30e5-42d0-a783-d4d89b3f4f65
+		summarizeBy: none
+		sourceColumn: amended_bill_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_action_date
+		dataType: string
+		lineageTag: 54cfa1f7-c8f4-439b-a0bf-b0a2f8a713b3
+		summarizeBy: none
+		sourceColumn: latest_action_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_action_text
+		dataType: string
+		lineageTag: 4d1d40a7-a36e-4c12-a68c-c3ca432532d6
+		summarizeBy: none
+		sourceColumn: latest_action_text
+
+		annotation SummarizationSetBy = Automatic
+
+	column update_date
+		dataType: string
+		lineageTag: a319ac2f-7b58-42e9-8c74-d57c71c20f68
+		summarizeBy: none
+		sourceColumn: update_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_amendments = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_amendments = Source{[Schema="congress_silver",Item="amendments"]}[Data]
+				in
+				    congress_silver_amendments
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

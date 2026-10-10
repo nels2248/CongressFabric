@@ -1,0 +1,39 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["congress_silver bills","congress_co_sponsors","congress_actions","congress_amendments","congress_commitees","congress_relatedbills","congress_sponrsors","congress_subjects","congress_summaries","congress_text_versions","congress_titles","congress_bill_ml","congress_bill_clusters","congress_bill_cluster_labels","congress_edges","congress_bill_cluster_summary","congress_bill_predictions","congress_bill_feature_importance","congress_bill_shap_values","congress_nodes"]
+
+ref table 'congress_silver bills'
+ref table congress_co_sponsors
+ref table congress_actions
+ref table congress_amendments
+ref table congress_commitees
+ref table congress_relatedbills
+ref table congress_sponrsors
+ref table congress_subjects
+ref table congress_summaries
+ref table congress_text_versions
+ref table congress_titles
+ref table congress_bill_ml
+ref table congress_bill_clusters
+ref table congress_bill_cluster_labels
+ref table 'Column Group'
+ref table 'Row Group'
+ref table DateTableTemplate_b3751d58-c697-41ab-b2fa-38112c6ebcfc
+ref table LocalDateTable_add97664-e22b-45fe-8714-adb88ff165a4
+ref table congress_edges
+ref table congress_bill_cluster_summary
+ref table congress_bill_predictions
+ref table congress_bill_feature_importance
+ref table congress_bill_shap_values
+ref table congress_nodes
+
+ref cultureInfo en-US
+

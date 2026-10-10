@@ -1,0 +1,108 @@
+table congress_co_sponsors
+	lineageTag: 5f833c11-a466-450a-b64d-c68e6db7be56
+
+	measure '# Co Sponsors' = count('congress_co_sponsors'[bill_id])
+		formatString: #,0
+		lineageTag: 704e10bf-1610-4514-8c79-95f80164b6fe
+
+	column bill_id
+		dataType: string
+		lineageTag: 98f712b5-e1a4-4dfd-ba0c-2d95df39c778
+		summarizeBy: none
+		sourceColumn: bill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column bioguide_id
+		dataType: string
+		lineageTag: 6f82d878-404e-489d-8ed2-e9fc55e69fcc
+		summarizeBy: none
+		sourceColumn: bioguide_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		lineageTag: 19b5ad64-4917-4d39-bcc0-543542638e25
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: 438acb7c-e9ff-46e3-be4b-1a7d3099c194
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column middle_name
+		dataType: string
+		lineageTag: e3993676-f1b9-4e99-9042-30393fa48353
+		summarizeBy: none
+		sourceColumn: middle_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: 31249016-20f6-4331-bc96-8483c10fc55d
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column party
+		dataType: string
+		lineageTag: 65c7d542-db63-4600-9dec-24cf84727be3
+		summarizeBy: none
+		sourceColumn: party
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 7ed6f003-8770-4aef-9e2f-05b5b39d2b75
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column district
+		dataType: string
+		lineageTag: ed0f66bc-5d1b-42eb-affb-8d481edaa6c2
+		summarizeBy: none
+		sourceColumn: district
+
+		annotation SummarizationSetBy = Automatic
+
+	column sponsorship_date
+		dataType: string
+		lineageTag: 8adcec64-bc4d-45eb-a6a3-a6aa60624912
+		summarizeBy: none
+		sourceColumn: sponsorship_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_original_cosponsor
+		dataType: string
+		lineageTag: ea652a50-f67b-496a-9a90-752f8f5bb02e
+		summarizeBy: none
+		sourceColumn: is_original_cosponsor
+
+		annotation SummarizationSetBy = Automatic
+
+	partition congress_co_sponsors = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("3i2vakbkq56e3cjc52trsvi7ci-5s2wcomd2muubngytrfuvtj5jq.datawarehouse.fabric.microsoft.com", "Lakehouse1"),
+				    congress_silver_cosponsors = Source{[Schema="congress_silver",Item="cosponsors"]}[Data]
+				in
+				    congress_silver_cosponsors
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
