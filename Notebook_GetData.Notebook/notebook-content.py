@@ -43,7 +43,7 @@
  
  
 # ════════════════════════════════════════════════════════════
-# CELL 1 — Config & shared helpers (run once, always first)
+# CELL 1 — IMPORTS
 # ════════════════════════════════════════════════════════════
  
 import io, re, zipfile, requests
@@ -51,6 +51,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+import json  # needed for etag/seen_files persistence — add if not already imported
 
 # METADATA ********************
 
@@ -61,7 +62,9 @@ import pyspark.sql.functions as F
 
 # CELL ********************
 
-import json  # needed for etag/seen_files persistence — add if not already imported
+# ════════════════════════════════════════════════════════════
+# CELL 2 — Config & shared helpers (run once, always first)
+# ════════════════════════════════════════════════════════════
 
 spark = SparkSession.builder.getOrCreate()
 spark.conf.set("spark.sql.parquet.datetimeRebaseModeInWrite", "CORRECTED")
@@ -752,11 +755,33 @@ print(f"  LAKEHOUSE_PATH = {LAKEHOUSE_PATH}")
 print(f"  MAX_FILES_PER_ZIP = {MAX_FILES_PER_ZIP}")
 
 
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
 # ════════════════════════════════════════════════════════════
 # CELL 2 — Load hconres  (~30 bills, fast)
 # ════════════════════════════════════════════════════════════
 
 process_zip("hconres", URLS["hconres"])
+
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
 
 
 # ════════════════════════════════════════════════════════════
@@ -766,11 +791,33 @@ process_zip("hconres", URLS["hconres"])
 process_zip("hjres", URLS["hjres"])
 
 
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+
+
 # ════════════════════════════════════════════════════════════
 # CELL 4 — Load hres
 # ════════════════════════════════════════════════════════════
 
 process_zip("hres", URLS["hres"])
+
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
 
 
 # ════════════════════════════════════════════════════════════
@@ -780,11 +827,33 @@ process_zip("hres", URLS["hres"])
 process_zip("sconres", URLS["sconres"])
 
 
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+
+
 # ════════════════════════════════════════════════════════════
 # CELL 6 — Load sjres
 # ════════════════════════════════════════════════════════════
 
 process_zip("sjres", URLS["sjres"])
+
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
 
 
 # ════════════════════════════════════════════════════════════
@@ -794,11 +863,33 @@ process_zip("sjres", URLS["sjres"])
 process_zip("sres", URLS["sres"])
 
 
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+
 # ════════════════════════════════════════════════════════════
 # CELL 8 — Load s  (Senate bills, moderate size)
 # ════════════════════════════════════════════════════════════
 
 process_zip("s", URLS["s"])
+
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
 
 
 # ════════════════════════════════════════════════════════════
@@ -808,107 +899,24 @@ process_zip("s", URLS["s"])
 #   temporarily changing the URL to avoid re-downloading.
 #   Or use the chunked loader in Cell 9b below instead.
 # ════════════════════════════════════════════════════════════
-
 process_zip("hr", URLS["hr"])
 
 
-# ════════════════════════════════════════════════════════════
-# CELL 9b — CHUNKED loader for hr (use instead of Cell 9
-#            if Cell 9 keeps disconnecting)
-# ════════════════════════════════════════════════════════════
-#
-# This downloads hr once, saves to Lakehouse Files, then
-# processes it in chunks of CHUNK_SIZE bills at a time.
-# Each chunk writes to Delta and checkpoints independently.
-#
-# UNCOMMENT and run this cell instead of Cell 9 if needed.
 
-# CHUNK_SIZE = 1000   # bills per batch
-#
-# def process_hr_chunked(chunk_size=1000):
-#     bill_type_key = "hr"
-#     url = URLS["hr"]
-#
-#     # Check if fully done
-#     if already_loaded(bill_type_key):
-#         return
-#
-#     print(f"Downloading hr zip...")
-#     resp = requests.get(url, timeout=600)
-#     resp.raise_for_status()
-#     print(f"  {len(resp.content)/1_048_576:.1f} MB downloaded")
-#
-#     with zipfile.ZipFile(io.BytesIO(resp.content)) as zf:
-#         xml_names = [n for n in zf.namelist() if n.endswith(".xml")]
-#
-#     # Find which chunk to start from
-#     start_chunk = 0
-#     try:
-#         cp = spark.read.format("delta").load(f"{LAKEHOUSE_PATH}/_checkpoints/hr_chunk").collect()
-#         start_chunk = max(r["chunk"] for r in cp) + 1
-#         print(f"  Resuming from chunk {start_chunk} ({start_chunk * chunk_size:,} bills already loaded)")
-#     except Exception:
-#         pass
-#
-#     total_chunks = (len(xml_names) + chunk_size - 1) // chunk_size
-#     print(f"  Total: {len(xml_names):,} files → {total_chunks} chunks of {chunk_size}")
-#
-#     with zipfile.ZipFile(io.BytesIO(resp.content)) as zf:
-#         for chunk_idx in range(start_chunk, total_chunks):
-#             chunk_files = xml_names[chunk_idx * chunk_size:(chunk_idx + 1) * chunk_size]
-#             print(f"\n  Chunk {chunk_idx+1}/{total_chunks} ({len(chunk_files)} files)...", end=" ")
-#
-#             buckets = {t: [] for t in ["bills","sponsors","cosponsors","actions",
-#                                        "subjects","titles","committees","summaries",
-#                                        "text_versions","related_bills","amendments","raw_xml"]}
-#             for xml_name in chunk_files:
-#                 try:
-#                     raw = zf.read(xml_name).decode("utf-8", errors="replace")
-#                     root = ET.fromstring(raw)
-#                     bill_row = parse_bill(root, xml_name.split("/")[-1], bill_type_key)
-#                     if not bill_row: continue
-#                     bill_id = bill_row["bill_id"]
-#                     buckets["raw_xml"].append({"source_file": xml_name.split("/")[-1],
-#                         "bill_type_dir": bill_type_key, "file_size_bytes": len(raw),
-#                         "raw_xml": raw, "ingested_at": now_utc()})
-#                     buckets["bills"].append(bill_row)
-#                     buckets["sponsors"].extend(parse_sponsors(root, bill_id))
-#                     buckets["cosponsors"].extend(parse_cosponsors(root, bill_id))
-#                     buckets["actions"].extend(parse_actions(root, bill_id))
-#                     buckets["subjects"].extend(parse_subjects(root, bill_id))
-#                     buckets["titles"].extend(parse_titles(root, bill_id))
-#                     buckets["committees"].extend(parse_committees(root, bill_id))
-#                     buckets["summaries"].extend(parse_summaries(root, bill_id))
-#                     buckets["text_versions"].extend(parse_text_versions(root, bill_id))
-#                     buckets["related_bills"].extend(parse_related_bills(root, bill_id))
-#                     buckets["amendments"].extend(parse_amendments(root, bill_id))
-#                 except ET.ParseError:
-#                     pass
-#
-#             write_delta_append(buckets["raw_xml"], "raw_xml", f"{LAKEHOUSE_PATH}/bronze")
-#             for t in ["bills","sponsors","cosponsors","actions","subjects","titles",
-#                       "committees","summaries","text_versions","related_bills","amendments"]:
-#                 write_delta_append(buckets[t], t, f"{LAKEHOUSE_PATH}/silver")
-#
-#             # Save chunk checkpoint
-#             spark.createDataFrame([{"chunk": chunk_idx, "files": len(chunk_files),
-#                                     "completed_at": now_utc()}]) \
-#                  .write.format("delta").mode("append") \
-#                  .save(f"{LAKEHOUSE_PATH}/_checkpoints/hr_chunk")
-#             print(f"✓ chunk {chunk_idx+1} saved")
-#
-#     write_checkpoint("hr", "complete", {"chunked": True})
-#     print(f"\n✓ hr fully loaded via chunked mode")
-#
-# process_hr_chunked(CHUNK_SIZE)
+# METADATA ********************
 
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
 
 # ════════════════════════════════════════════════════════════
 # CELL 10 — Build GOLD layer  (run after all Silver is loaded)
 # ════════════════════════════════════════════════════════════
 
 print("Building Gold layer...")
-
 # Register Silver tables as temp views
 silver_tables = ["bills","sponsors","cosponsors","actions","subjects","titles",
                  "committees","summaries","text_versions","related_bills","amendments"]
@@ -1002,6 +1010,17 @@ for name, sql in gold_queries.items():
 print("✓ Gold layer complete")
 
 
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+
+
 # ════════════════════════════════════════════════════════════
 # CELL 11 — Register all tables in Lakehouse metastore
 #            (makes them visible in SQL Endpoint & Power BI)
@@ -1026,6 +1045,16 @@ for db, tables in registrations.items():
         print(f"  Registered: {db}.{t}")
 
 print("\n✓ All tables registered in metastore")
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
 
 
 # ════════════════════════════════════════════════════════════
@@ -1059,17 +1088,12 @@ print("  • Power BI DirectLake: point at congress_gold schema")
 
 # CELL ********************
 
+# ════════════════════════════════════════════════════════════
+# CELL 13 — Register tables in lakehouse
+# ════════════════════════════════════════════════════════════
+
+
 LAKEHOUSE_PATH = "abfss://3961b5ec-d383-4029-b4d8-9c4b4acd3d4c@onelake.dfs.fabric.microsoft.com/39418109-5bb5-4630-a82f-fc5836ac8a08/Files/congress"
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
 
 for db in ["congress_bronze", "congress_silver", "congress_gold"]:
     spark.sql(f"CREATE DATABASE IF NOT EXISTS {db}")
