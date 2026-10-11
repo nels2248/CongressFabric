@@ -61,27 +61,6 @@ import pyspark.sql.functions as F
 
 # CELL ********************
 
-print(notebookutils.fs.mounts())
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
 import json  # needed for etag/seen_files persistence — add if not already imported
 
 spark = SparkSession.builder.getOrCreate()
