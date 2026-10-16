@@ -153,38 +153,10 @@ vectorized = vectorized.filter(is_nonzero(F.col("features")))
 
 # CELL ********************
 
-# ── 3. ELBOW CHECK ───────────────────────────────────────────
+# ── 3. FINAL KMEANS ──────────────────────────────────────────
 import mlflow
 
-print("\nElbow check:")
-try:
-    with mlflow.start_run(run_name="elbow_check_sweep"):
-        for k in [10, 15, 20, 25, 30]:
-            km = KMeans(
-                featuresCol="features",
-                predictionCol="cluster",
-                k=k,
-                seed=42,
-                maxIter=20,
-                distanceMeasure="cosine"
-            )
-            cost = km.fit(vectorized).summary.trainingCost
-            mlflow.log_metric(f"wssse_k{k}", cost)
-            print(f"k={k}: {cost:,.4f}")
-finally:
-    mlflow.end_run()
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-# ── 4. FINAL KMEANS ──────────────────────────────────────────
+#HAD ELBOW CHECKING INCORORATED BEFORE BUT TOOK THIS OUT TO SIMPLIFY CODE.  COULD BE ADDED BACK IN LATER.  THIS IS A TECHNIQUE THAT IS USED TO DETERMINE THE BEST AMOUNT OF GROUPS
 print(f"\nTraining final model K={K}...")
 
 try:
@@ -217,7 +189,7 @@ finally:
 
 # CELL ********************
 
-# ── 5. OUTPUT TABLE ──────────────────────────────────────────
+# ── 4. OUTPUT TABLE ──────────────────────────────────────────
 output = clustered.select(
     "bill_id",
     "title",
@@ -245,7 +217,7 @@ output = clustered.select(
 
 # CELL ********************
 
-# ── 6. WRITE CLUSTERS (CLEAN REBUILD) ───────────────────────
+# ── 5. WRITE CLUSTERS (CLEAN REBUILD) ───────────────────────
 print("\nWriting bill_clusters...")
 
 spark.sql("DROP TABLE IF EXISTS congress_gold.bill_clusters")
@@ -273,7 +245,7 @@ LOCATION '{cluster_path}'
 
 # CELL ********************
 
-# ── 7. CLUSTER SUMMARY ──────────────────────────────────────
+# ── 8. CLUSTER SUMMARY ──────────────────────────────────────
 print("Writing cluster summary...")
 
 spark.sql("DROP TABLE IF EXISTS congress_gold.bill_cluster_summary")
@@ -296,7 +268,7 @@ cluster_summary.write \
 
 print("  Registered: congress_gold.bill_cluster_summary")
 
-# ── 8. FINAL OUTPUT ─────────────────────────────────────────
+# ── 9. FINAL OUTPUT ─────────────────────────────────────────
 print("\n==============================")
 print("CLUSTERING COMPLETE")
 print("==============================")
@@ -314,6 +286,8 @@ print("\nDone ✓")
 # META }
 
 # CELL ********************
+
+#FINAL CLEANUP
 
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
